@@ -1,8 +1,8 @@
 %let path=C:\Users\ATSEN\Desktop\SAS playground\NEET_BASE_EX_1\NEET_BASE_EX_1\Data;
-
+	
 
 data work.ex1neet1;
-infile "%path\NEET_BASE_EX_1_HEDGE_DATA.csv";
+infile "&path\NEET_BASE_EX_1_HEDGE_DATA.csv";
 input crefno	facility_id	facility_version	facility_sublimit	host_system_id
 transaction_id	link_id	cpsn	gfc_id	tcid	netting_type	netting_id	cob	p_f	crf	cmtm_feed
 cmtm_psr	tenor	product_group	special_cef	display_name	smart_code	smart_descrip	sub_instrument
@@ -23,17 +23,4 @@ run;
 proc contents data=work.ex1neet1;
 run;
 
-proc print data=work.ex1neet1 (obs=10);
-run;
 
-proc import datafile= "%path\NEET_BASE_EX_1_HEDGE_DATA.csv"
-			out=work.ex1neet2
-			dbms=csv
-			replace;
-run;
-
-proc contents data=work.ex1neet1;
-run;
-
-proc print data=work.ex1neet2 (obs=10);
-run;
