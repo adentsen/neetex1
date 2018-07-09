@@ -248,3 +248,123 @@ proc import datafile="&path\NEET_BASE_EX_1_HEDGE_DATA.csv"
 proc contents data=work.ex1neet1;run;
 proc print data=work.ex1neet1 (obs=10);run;
 
+
+
+*Task 2: Transfer data to SAS, Bond Data;
+*Data Step Method;
+*Data Step Method;
+%let path=C:\Users\ATSEN\Desktop\SAS playground\NEET_BASE_EX_1\NEET_BASE_EX_1\Data;
+data work.ex1neet2;
+infile "&path\NEET_BASE_EX_1_BOND_DATA.csv"  missover dsd firstobs=3;*dsd=delimiter sensitive data;
+input
+/*COUPON_FREQ	*/
+/*COUPON_RTE*/
+/*COUPON_RTE_agg	*/
+/*DPP_GAMMA*/
+/*DPP_GAMMA_agg	*/
+/*DPP_LAMDA	*/
+/*DPP_LAMDA_agg*/
+/*DPP_SIGMA	*/
+/*DPP_SIGMA_agg*/
+/*INDFLT*/
+/*ISSUER_ID	*/
+/*MATURDATE	*/
+/*MATURDATE_agg*/
+/*PARVAL*/
+/*PARVAL_agg*/
+/*CUSIP	*/
+/*DESCRIPTION*/
+/*AUTHOR*/
+/*FILE_GENERATION_TIMESTAMP*/
+/*FOR_DATE	*/
+/*SOURCE_SYSTEM	*/
+/*RECORD_COUNT*/
+/*RECORD_COUNT_agg	*/
+
+COUPON_FREQ     $:1.     
+COUPON_RTE     :8.     
+COUPON_RTE_agg     :8.     
+DPP_GAMMA     :8.     
+DPP_GAMMA_agg     :8.     
+DPP_LAMDA     :8.     
+DPP_LAMDA_agg     :8.     
+DPP_SIGMA     :8.     
+DPP_SIGMA_agg     :8.     
+INDFLT     $:1.     
+ISSUER_ID     $:5.     
+MATURDATE     :8.     
+MATURDATE_agg     :8.     
+PARVAL     :8.     
+PARVAL_agg     :8.     
+CUSIP     $:9.     
+DESCRIPTION     $:20.     
+AUTHOR     $:19.     
+FILE_GENERATION_TIMESTAMP     :8.     
+FOR_DATE     :8.     
+SOURCE_SYSTEM     $:17.     
+RECORD_COUNT     :8.     
+RECORD_COUNT_agg     :8.     
+;
+
+run; 
+
+proc contents data=work.ex1neet2;run;
+proc print data=work.ex1neet2 (obs=10);
+run;
+
+*Proc Import Method;
+*Proc Import Method;
+%let path=C:\Users\ATSEN\Desktop\SAS playground\NEET_BASE_EX_1\NEET_BASE_EX_1\Data;
+ 
+proc import datafile="&path\NEET_BASE_EX_1_BOND_DATA.csv"
+			
+			out=work.ex1neet1
+			dbms=csv
+			replace;
+			getnames=no;
+		
+			datarow=3;
+			
+			run;
+			*dbms=database management system;
+
+
+
+data work.ex1neet2;
+set work.ex1neet1;
+rename 
+VAR1=COUPON_FREQ
+VAR2=COUPON_RTE	
+VAR3=COUPON_RTE_agg
+VAR4=DPP_GAMMA
+VAR5=DPP_GAMMA_agg	
+VAR6=DPP_LAMDA
+VAR7=DPP_LAMDA_agg
+VAR8=DPP_SIGMA	
+VAR9=DPP_SIGMA_agg	
+VAR10=INDFLT	
+VAR11=ISSUER_ID	
+VAR12=MATURDATE
+VAR13=MATURDATE_agg	
+VAR14=PARVAL	
+VAR15=PARVAL_agg
+VAR16=CUSIP
+VAR17=DESCRIPTION
+VAR18=AUTHOR
+VAR19=FILE_GENERATION_TIMESTAMP
+VAR20=FOR_DATE	
+VAR21=SOURCE_SYSTEM
+VAR22=RECORD_COUNT
+VAR23=RECORD_COUNT_agg	
+;
+run;
+
+
+
+proc contents data=work.ex1neet1;run;
+proc print data=work.ex1neet1 (obs=10);run;
+
+proc contents data=work.ex1neet2;run;
+proc print data=work.ex1neet2 (obs=10);run;
+
+
