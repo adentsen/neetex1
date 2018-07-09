@@ -1,0 +1,133 @@
+*NEET BASE EXCERCISE 1;
+*Task 1: There are couple ways of importing csv file to SAS; import wizard, data step, proc import;
+
+*Data Step Method;
+%let path=C:\Users\ATSEN\Desktop\SAS playground\NEET_BASE_EX_1\NEET_BASE_EX_1\Data;
+data work.ex1neet1;
+infile "&path\NEET_BASE_EX_1_HEDGE_DATA.csv"  missover dsd firstobs=2;*dsd=delimiter sensitive data;
+input
+crefno     :8.     
+facility_id     :8.     
+facility_version     :8.     
+facility_sublimit     :8.     
+host_system_id     :8.     
+transaction_id     $:10.     
+link_id     $:1.     
+cpsn     $:35.     
+gfc_id     :8.     
+tcid     $:8.     
+netting_type     $:1.     
+netting_id     :8.     
+cob     :MMDDYY10.     
+p_f     $:1.     
+crf     :8.     
+cmtm_feed     :8.     
+cmtm_psr     :8.     
+tenor     :8.     
+product_group     $:9.     
+special_cef     $:1.     
+display_name     $:15.     
+smart_code     $:7.     
+smart_descrip     $:21.     
+sub_instrument     :8.     
+long_description     $:33.     
+margin_id     :8.     
+margin_eligible     $:1.     
+mliv     :8.     
+trade_date     :MMDDYY10.     
+und_start_date     :MMDDYY10.     
+settle_date     :MMDDYY10.     
+mature_date     :MMDDYY10.     
+ccy1     $:3.     
+notional1     :8.     
+int_type1     $:2.     
+freq1     :8.     
+fix_rate1     :8.     
+spread1     :8.     
+spread_sign1     $:1.     
+spread_type1     $:1.     
+day_count1     :8.     
+ref_rate_ccy1     $:1.     
+ref_rate_desc1     $:4.     
+ccy2     $:3.     
+notional2     :8.     
+int_type2     $:2.     
+freq2     :8.     
+fix_rate2     :8.     
+spread2     :8.     
+spread_sign2     $:1.     
+spread_type2     $:1.     
+day_count2     :8.     
+ref_rate_ccy2     $:1.     
+ref_rate_desc2     $:4.     
+proxy     $:1.     
+buy_sell_id     $:1.     
+put_call     $:1.     
+ric     $:1.     
+opt_expiry     :MMDDYY10.     
+opt_strike     :8.     
+opt_style     $:1.     
+opt_disc_curve     $:1.     
+opt_vol_index     $:1.     
+barrier     :8.     
+digital_opt_payoff     :8.     
+in_out_ind     $:1.     
+rehypo_ind     $:1.     
+rebate     :8.     
+up_down_ind     $:1.     
+crf_id     $:1.     
+initial_margin     :8.     
+aaa_ind     $:1.     
+method_ind     $:2.     
+moodys_rating     $:1.     
+sp_rating     $:1.     
+no_preset_ind     $:1.     
+citicorp_unit_gfcid     :8.     
+conversion_factor     :8.     
+ref_rate_source_1     $:4.     
+commodity_descr_1     $:15.     
+notional_units_1     $:6.     
+notional_units_year_1     :8.     
+ftr_offset_1     :8.     
+ref_rate_source_2     $:4.     
+commodity_descr_2     $:15.     
+notional_units_2     $:6.     
+notional_units_year_2     :8.     
+ftr_offset_2     :8.     
+default_swap_current_spread     $:1.     
+default_swap_ref_entity     $:1.     
+reference_derivative     $:1.     
+buy_sell_ccds     $:1.     
+system_ref_id     $:10.     
+ref_rate_term1     :8.     
+ref_rate_term2     :8.     
+cusip     $:1.     
+_0d_1w     $:1.     
+_1w_1m     $:1.     
+_1m_3m     $:1.     
+_3m_6m     $:1.     
+_6m_1y     $:1.     
+_1y_3y     $:1.     
+_3y_5y     $:1.     
+_5y_8y     $:1.     
+_8y_10y     $:1.     
+_10y_15y     $:1.   ;  
+run; 
+
+proc contents data=work.ex1neet1;run;
+proc print data=work.ex1neet1 (obs=10);
+run;
+
+
+*Proc Import Method;
+%let path=C:\Users\ATSEN\Desktop\SAS playground\NEET_BASE_EX_1\NEET_BASE_EX_1\Data;
+ 
+proc import datafile="&path\NEET_BASE_EX_1_HEDGE_DATA.csv"
+			out=work.ex1neet1
+			dbms=csv *dbms=database management system;
+			replace;
+			run;
+			
+proc contents data=work.ex1neet1;run;
+proc print data=work.ex1neet1 (obs=10);run;
+
