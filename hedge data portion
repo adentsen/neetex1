@@ -1,0 +1,39 @@
+%let path=C:\Users\ATSEN\Desktop\SAS playground\NEET_BASE_EX_1\NEET_BASE_EX_1\Data;
+
+
+data work.ex1neet1;
+infile "%path\NEET_BASE_EX_1_HEDGE_DATA.csv";
+input crefno	facility_id	facility_version	facility_sublimit	host_system_id
+transaction_id	link_id	cpsn	gfc_id	tcid	netting_type	netting_id	cob	p_f	crf	cmtm_feed
+cmtm_psr	tenor	product_group	special_cef	display_name	smart_code	smart_descrip	sub_instrument
+long_description	margin_id	margin_eligible	mliv	trade_date	und_start_date	settle_date	mature_date	ccy1
+notional1	int_type1	freq1	fix_rate1	spread1	spread_sign1	spread_type1	day_count1	
+ref_rate_ccy1	ref_rate_desc1	ccy2	notional2	int_type2	freq2	fix_rate2	spread2	spread_sign2
+spread_type2	day_count2	ref_rate_ccy2	ref_rate_desc2	proxy	buy_sell_id	put_call	ric	opt_expiry
+opt_strike	opt_style	opt_disc_curve	opt_vol_index	barrier	digital_opt_payoff	in_out_ind	rehypo_ind	rebate
+up_down_ind	crf_id	initial_margin	aaa_ind	method_ind	moodys_rating	sp_rating	no_preset_ind	citicorp_unit_gfcid
+conversion_factor	ref_rate_source_1	commodity_descr_1	notional_units_1	notional_units_year_1
+ftr_offset_1	ref_rate_source_2	commodity_descr_2	notional_units_2	notional_units_year_2	ftr_offset_2
+default_swap_current_spread	default_swap_ref_entity	reference_derivative	buy_sell_ccds	system_ref_id	ref_rate_term1	
+ref_rate_term2	cusip	
+zeroD_1w   	oneW_1m   	oneM_3m   	threeM_6m   	sixM_1y   	oneY_3y   	threeY_5y   	fiveY_8y   	eigthY_10y  	tenY_15y ;
+run;
+*0d-1w   	1w-1m   	1m-3m   	3m-6m   	6m-1y   	1y-3y   	3y-5y   	5y-8y   	8y-10y  	10y-15y ;
+
+proc contents data=work.ex1neet1;
+run;
+
+proc print data=work.ex1neet1 (obs=10);
+run;
+
+proc import datafile= "%path\NEET_BASE_EX_1_HEDGE_DATA.csv"
+			out=work.ex1neet2
+			dbms=csv
+			replace;
+run;
+
+proc contents data=work.ex1neet1;
+run;
+
+proc print data=work.ex1neet2 (obs=10);
+run;
