@@ -1,5 +1,7 @@
 *NEET BASE EXCERCISE 1;
+***************************************************************************************************
 *Task 1: There are couple ways of importing csv file to SAS; import wizard, data step, proc import;
+***************************************************************************************************
 
 *Data Step Method;
 %let path=C:\Users\ATSEN\Desktop\SAS playground\NEET_BASE_EX_1\NEET_BASE_EX_1\Data;
@@ -312,13 +314,19 @@ proc contents data=work.ex1neet2;run;
 proc print data=work.ex1neet2 (obs=10);
 run;
 
+
+***************************************************************
+***************************************************************
+***************************************************************
+*Task2;
+***************************************************************
 *Proc Import Method;
 *Proc Import Method;
 %let path=C:\Users\ATSEN\Desktop\SAS playground\NEET_BASE_EX_1\NEET_BASE_EX_1\Data;
  
 proc import datafile="&path\NEET_BASE_EX_1_BOND_DATA.csv"
 			
-			out=work.ex1neet1
+			out=work.ex1neet1_proc_import_result1
 			dbms=csv
 			replace;
 			getnames=no;
@@ -329,9 +337,11 @@ proc import datafile="&path\NEET_BASE_EX_1_BOND_DATA.csv"
 			*dbms=database management system;
 
 
+*Rename headers of Proc Import Result;
+data work.ex1neet1_proc_import_result2;also can include "(keep = CUSIP, MATURDATE, COUPON_RTE, COUPON_FREQ, ISSUER_ID, PARVAL, DPP_GAMMA, DPP_LAMBDA, DPP_SIGMA, INDFLT)
+set work.ex1neet1_proc_import_result1;*also can include "(keep = CUSIP, MATURDATE, COUPON_RTE, COUPON_FREQ, ISSUER_ID, PARVAL, DPP_GAMMA, DPP_LAMBDA, DPP_SIGMA, INDFLT)
 
-data work.ex1neet2;
-set work.ex1neet1;
+* keep CUSIP, MATURDATE, COUPON_RTE, COUPON_FREQ, ISSUER_ID, PARVAL, DPP_GAMMA, DPP_LAMBDA, DPP_SIGMA, INDFLT;
 rename 
 VAR1=COUPON_FREQ
 VAR2=COUPON_RTE	
@@ -361,10 +371,12 @@ run;
 
 
 
-proc contents data=work.ex1neet1;run;
-proc print data=work.ex1neet1 (obs=10);run;
+proc contents data=work.ex1neet1_proc_import_result1;run;
+proc print data=work.ex1neet1_proc_import_result1 (obs=10);run;
 
-proc contents data=work.ex1neet2;run;
-proc print data=work.ex1neet2 (obs=10);run;
+proc contents data=work.ex1neet1_proc_import_result2;run;
+proc print data=work.ex1neet2_proc_import_result2 (obs=10);
+var  CUSIP, MATURDATE, COUPON_RTE, COUPON_FREQ, ISSUER_ID, PARVAL, DPP_GAMMA, DPP_LAMBDA, DPP_SIGMA, INDFLT;
+run;
 
 
